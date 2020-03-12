@@ -35,6 +35,16 @@ O método de GET com um id retorna a URL associada àquele ID. Se você fizer um
 
 ### GET /metrics/{id}
 O método de GET metrics é utilizado para retornar a quantidade de chamadas feitas a uma URL em particular; o id utilizado é mesmo ID da URL encurtada.
+
+## Escolhas técnicas
+### Por quê utilizar o Spring Boot?
+O Spring Boot é um dos frameworks mais populares de desenvolvimento de aplicações Java, que permite que configurações predefinidas acelerem o desenvolvimento e diminuam o tempo necessário na instalação de pacotes e conexões entre classes. Além disso, o Spring Boot WEB permite a criação de APIs REST de forma simples e efetiva.
+
+### Por quê utilizar o Redis?
+Além de já ter tido uma breve experiência com o Redis em um projeto em âmbito profissional, o Redis foi feito para projetos que possuem escalabilidade como necessidade, uma vez que ele opera como um cache de aplicação. Supondo um projeto como esse na "vida real", imaginamos que exista um conjunto de sites que seja mais acessado que os demais, e quanto menos chamadas a um banco forem necessárias serem realizadas, melhor, uma vez que são chamadas mais demoradas. Isso otimiza o tempo de resposta médio de chamadas, garantindo um melhor desempenho da aplicação.
+
+Não é uma solução completa, poderia incluir um banco de dados não-relacional para gravar o conteúdo e trazer apenas quando os dados não estiverem no cache, mas para efeitos de prototipagem considerei o bastante como um proof-of-concept.
+
 ## Créditos
 O projeto foi desenvolvido com base num tutorial escrito por Denim Mazuki, que você pode encontrar [aqui](https://hackernoon.com/url-shortening-service-in-java-spring-boot-and-redis-d2a0f8848a1d).
 A maior parte do código base é baseado no passo-a-passo do tutorial; no entanto, a correção de alguns bugs do código original, bem como a implementação do *endpoint* de métricas e a execução do testes unitários foram feitos por conta própria.
