@@ -92,10 +92,15 @@ public class IDConverter {
      */
     private static List<Integer> convertBase10ToBase62ID(Long id) {
         List<Integer> digits = new LinkedList<>();
-        while(id > 0) {
-            int remainder = (int)(id % 62);
-            ((LinkedList<Integer>) digits).addFirst(remainder);
-            id /= 62;
+        if (id == 0) {
+        	((LinkedList<Integer>) digits).addFirst(0);
+        }
+        else {
+            while(id > 0) {
+                int remainder = (int)(id % 62);
+                ((LinkedList<Integer>) digits).addFirst(remainder);
+                id /= 62;
+            }
         }
         return digits;
     }

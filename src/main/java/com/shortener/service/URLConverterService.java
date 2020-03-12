@@ -38,6 +38,7 @@ public class URLConverterService {
         urlRepository.saveUrl("url:"+id, longUrl);
         String baseString = formatLocalURLFromShortener(localURL);
         String shortenedURL = baseString + uniqueID;
+        urlRepository.setZeroHits(id);
         return shortenedURL;
     }
 
@@ -70,5 +71,15 @@ public class URLConverterService {
         sb.append('/');
         return sb.toString();
     }
+
+	public String getURLmetricsFromID(Long id) {
+		return urlRepository.getHits(id);
+	}
+
+	public void setMetricsValue(Long id) {
+		Long hits = Long.parseLong(getURLmetricsFromID(id));
+		hits = hits + 1;
+		urlRepository.setHits(id, hits);
+	}
 
 }

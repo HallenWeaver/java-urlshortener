@@ -14,6 +14,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.shortener.common.IDConverter;
 import com.shortener.common.URLValidator;
 import com.shortener.service.URLConverterService;
 
@@ -45,10 +46,19 @@ public class URLController {
     public RedirectView redirectUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
         LOGGER.info("Received shortened url to redirect: " + id);
         String redirectUrlString = urlConverterService.getLongURLFromID(id);
+        urlConverterService.setMetricsValue(IDConverter.getDictionaryKeyFromUniqueID(id));
         LOGGER.info("Original URL: " + redirectUrlString);
         RedirectView redirectView = new RedirectView();
         redirectView.setUrl(redirectUrlString);
         return redirectView;
+    }
+    
+    @RequestMapping(value = "/metrics/{id}", method=RequestMethod.GET)
+    public String metricsUrl(@PathVariable String id, HttpServletRequest request, HttpServletResponse response) throws IOException, URISyntaxException, Exception {
+        LOGGER.info("Received id for metrics: " + id);
+        String urlMetricsString = urlConverterService.getURLmetricsFromID(IDConverter.getDictionaryKeyFromUniqueID(id));
+        LOGGER.info("Metrics: " + urlMetricsString);
+        return urlMetricsString;
     }
 }
 

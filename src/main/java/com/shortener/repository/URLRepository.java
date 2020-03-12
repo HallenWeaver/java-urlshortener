@@ -69,4 +69,20 @@ public class URLRepository {
         }
         return url;
     }
+
+	public void setZeroHits(Long id) {
+		LOGGER.info("Set Zero Hits: id {}", id);
+        jedis.hset(urlKey, "metrics-" + id.toString(), "0");
+	}
+	
+	public String getHits(Long id) {
+		LOGGER.info("Retrieving hits for id: {}", id);
+		String hits = jedis.hget(urlKey, "metrics-" + id.toString());
+		return hits;
+	}
+
+	public void setHits(Long id, Long hits) {
+		LOGGER.info("Update Hits: id {} has {} hits", id, hits);
+        jedis.hset(urlKey, "metrics-" + id.toString(), hits.toString());
+	}
 }
