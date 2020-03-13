@@ -40,7 +40,22 @@
 		<dependency>
     		<groupId>redis.clients</groupId>
     		<artifactId>jedis</artifactId>
-		</dependency>	
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.mockito/mockito-all -->
+		<dependency>
+    		<groupId>org.mockito</groupId>
+    		<artifactId>mockito-all</artifactId>
+    		<version>1.10.19</version>
+    		<scope>test</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.rest-assured</groupId>
+			<artifactId>rest-assured</artifactId>
+			<scope>test</scope>
+		</dependency>
+			
 	</dependencies>
 
 	<build>
